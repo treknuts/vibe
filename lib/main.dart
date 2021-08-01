@@ -18,7 +18,13 @@ class AppMain extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+            )
+          ),
         ),
         body: ListWidget(),
       ),
@@ -35,13 +41,13 @@ class ListWidget extends StatefulWidget {
 }
 
 class _ListWidgetState extends State<ListWidget> {
-  int selectedIndex = 0;
+  int selectedIndex = -1;
 
   List<Map<String, dynamic>> vibes = [
   {
     'title': 'Loud',
     'icon': Icon(Icons.arrow_right_sharp),
-    'selected': true,
+    'selected': false,
   },
     {
       'index': 0,
@@ -93,7 +99,7 @@ class _ListWidgetState extends State<ListWidget> {
             style: index == selectedIndex ? TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
           ),
           selected: index == selectedIndex,
-          selectedTileColor: Colors.blue,
+          selectedTileColor: index % 2 == 0 ? Colors.blue : Colors.orange,
           onTap: () {
             setState(() {
               selectedIndex = index;
