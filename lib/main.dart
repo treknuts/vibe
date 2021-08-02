@@ -22,16 +22,10 @@ class AppMain extends StatelessWidget {
               child: Text(title, style: TextStyle(color: Colors.white))
             ),
           ),
-          body: Stack(
-            children: <Widget>[
+          body: ListView(
+            children: [
               ListWidget(),
-              new Positioned(
-                width: 100.0,
-                height: 20.0,
-                left: 0,
-                bottom: 0,
-                child: ButtonRowSection(),
-              )
+              ButtonRowSection()
             ],
           )
         ),
@@ -45,7 +39,7 @@ class ButtonRowSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         BottomNavColumn(Icons.weekend_outlined),
         BottomNavColumn(Icons.perm_contact_cal_outlined),
@@ -149,6 +143,18 @@ class _ListWidgetState extends State<ListWidget> {
       'icon': Icon(Icons.arrow_right_sharp),
       'selected': false,
     },
+    {
+      'index': 10,
+      'title': 'Cringe',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
+    },
+    {
+      'index': 11,
+      'title': 'Vibez',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
+    }
   ];
 
   @override
@@ -156,21 +162,27 @@ class _ListWidgetState extends State<ListWidget> {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
+      physics: BouncingScrollPhysics(),
       itemCount: vibes.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          leading: vibes[index]['icon'],
-          title: Text(
-            vibes[index]['title'],
-            style: index == selectedIndex ? TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
-          ),
-          selected: index == selectedIndex,
-          selectedTileColor: index % 2 == 0 ? Colors.blue : Colors.orange,
-          onTap: () {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              leading: vibes[index]['icon'],
+              title: Text(
+                vibes[index]['title'],
+                style: index == selectedIndex ? TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
+              ),
+              selected: index == selectedIndex,
+              selectedTileColor: index % 2 == 0 ? Colors.blue : Colors.orange,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+            ),
+          )
         );
       },
     );
