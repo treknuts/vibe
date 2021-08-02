@@ -17,17 +17,57 @@ class AppMain extends StatelessWidget {
         primarySwatch: Colors.lightBlue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-            )
+          appBar: AppBar(
+            title: Center(
+              child: Text(title, style: TextStyle(color: Colors.white))
+            ),
           ),
+          body: Stack(
+            children: <Widget>[
+              ListWidget(),
+              new Positioned(
+                width: 100.0,
+                height: 20.0,
+                left: 0,
+                bottom: 0,
+                child: ButtonRowSection(),
+              )
+            ],
+          )
         ),
-        body: ListWidget(),
-      ),
+      );
+  }
+}
+
+class ButtonRowSection extends StatelessWidget {
+  ButtonRowSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        BottomNavColumn(Icons.weekend_outlined),
+        BottomNavColumn(Icons.perm_contact_cal_outlined),
+        BottomNavColumn(Icons.search)
+      ],
+    );
+  }
+}
+
+class BottomNavColumn extends StatelessWidget {
+  BottomNavColumn(this.icon);
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Icon(icon, color: Colors.green),
+      ],
     );
   }
 }
@@ -85,11 +125,37 @@ class _ListWidgetState extends State<ListWidget> {
       'icon': Icon(Icons.arrow_right_sharp),
       'selected': false,
     },
+    {
+      'index': 6,
+      'title': 'Preppy',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
+    },
+    {
+      'index': 7,
+      'title': 'Low-key',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
+    },
+    {
+      'index': 8,
+      'title': 'Neatural',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
+    },
+    {
+      'index': 9,
+      'title': 'Hipster',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       itemCount: vibes.length,
       itemBuilder: (context, index) {
         return ListTile(
