@@ -17,19 +17,19 @@ class AppMain extends StatelessWidget {
         primarySwatch: Colors.lightBlue,
       ),
       home: Scaffold(
-          appBar: AppBar(
-            title: Center(
-              child: Text(title, style: TextStyle(color: Colors.white))
-            ),
+        appBar: AppBar(
+          title: Center(
+            child: Text(title, style: TextStyle(color: Colors.white))
           ),
-          body: ListView(
-            children: [
-              ListWidget(),
-              ButtonRowSection()
-            ],
-          )
         ),
-      );
+        body: ListView(
+          children: [
+            ListWidget(),
+            ButtonRowSection()
+          ],
+        )
+      ),
+    );
   }
 }
 
@@ -160,14 +160,15 @@ class _ListWidgetState extends State<ListWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.all(16.0),
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      physics: BouncingScrollPhysics(),
+      physics: ClampingScrollPhysics(),
       itemCount: vibes.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+        return Container(
+          child: Card(
+            shadowColor: Colors.brown,
             child: ListTile(
               leading: vibes[index]['icon'],
               title: Text(
@@ -182,7 +183,16 @@ class _ListWidgetState extends State<ListWidget> {
                 });
               },
             ),
-          )
+          ),
+          decoration: new BoxDecoration(
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black45,
+                blurRadius: 20.0,
+                spreadRadius: 1.0,
+              ),
+            ]
+          ),
         );
       },
     );
