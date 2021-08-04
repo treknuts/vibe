@@ -47,9 +47,9 @@ class ButtonRowSection extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            BottomNavColumn(Icons.weekend_outlined),
-            BottomNavColumn(Icons.perm_contact_cal_outlined),
-            BottomNavColumn(Icons.search)
+            BottomNavColumn(Icons.weekend),
+            BottomNavColumn(Icons.perm_contact_cal),
+            BottomNavColumn(Icons.add_circle_rounded)
           ],
       ),
     );
@@ -67,7 +67,7 @@ class BottomNavColumn extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Icon(icon, color: Colors.green),
+        Icon(icon, color: Colors.blue),
       ],
     );
   }
