@@ -22,10 +22,14 @@ class AppMain extends StatelessWidget {
             child: Text(title, style: TextStyle(color: Colors.white))
           ),
         ),
-        body: ListView(
+        body: Column(
           children: [
-            ListWidget(),
-            ButtonRowSection()
+            Expanded(
+              child: ListWidget(),
+            ),
+            Container(
+              child: ButtonRowSection(),
+            )
           ],
         )
       ),
@@ -38,13 +42,16 @@ class ButtonRowSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        BottomNavColumn(Icons.weekend_outlined),
-        BottomNavColumn(Icons.perm_contact_cal_outlined),
-        BottomNavColumn(Icons.search)
-      ],
+    return Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            BottomNavColumn(Icons.weekend_outlined),
+            BottomNavColumn(Icons.perm_contact_cal_outlined),
+            BottomNavColumn(Icons.search)
+          ],
+      ),
     );
   }
 }
