@@ -27,11 +27,9 @@ class AppMain extends StatelessWidget {
             Expanded(
               child: ListWidget(),
             ),
-            Container(
-              child: ButtonRowSection(),
-            )
           ],
-        )
+        ),
+        bottomNavigationBar: ButtonRowSection(),
       ),
     );
   }
@@ -42,7 +40,9 @@ class ButtonRowSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Colors.blue,
+      child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,6 +51,7 @@ class ButtonRowSection extends StatelessWidget {
             BottomNavColumn(Icons.perm_contact_cal),
             BottomNavColumn(Icons.add_circle_rounded)
           ],
+        ),
       ),
     );
   }
@@ -67,7 +68,7 @@ class BottomNavColumn extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Icon(icon, color: Colors.blue),
+        Icon(icon, color: Colors.white),
       ],
     );
   }
