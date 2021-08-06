@@ -17,59 +17,22 @@ class AppMain extends StatelessWidget {
         primarySwatch: Colors.lightBlue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text(title, style: TextStyle(color: Colors.white))
-          ),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListWidget(),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              pinned: true,
+              snap: false,
+              floating: false,
+              expandedHeight: 160.0,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text("Vibe", style: TextStyle(color: Colors.white),),
+                background: Image(image: AssetImage("assets/icon/icon.png"),),
+              ),
             ),
+            ListWidget(),
           ],
-        ),
-        bottomNavigationBar: ButtonRowSection(),
+        )
       ),
-    );
-  }
-}
-
-class ButtonRowSection extends StatelessWidget {
-  ButtonRowSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: Padding(
-        padding: EdgeInsets.only(top: 8.0, bottom: 18.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BottomNavColumn(Icons.weekend),
-            BottomNavColumn(Icons.perm_contact_cal),
-            BottomNavColumn(Icons.add_circle_rounded)
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BottomNavColumn extends StatelessWidget {
-  BottomNavColumn(this.icon);
-
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Icon(icon, color: Colors.white),
-      ],
     );
   }
 }
@@ -86,11 +49,6 @@ class _ListWidgetState extends State<ListWidget> {
   int selectedIndex = -1;
 
   List<Map<String, dynamic>> vibes = [
-  {
-    'title': 'Loud',
-    'icon': Icon(Icons.arrow_right_sharp),
-    'selected': false,
-  },
     {
       'index': 0,
       'title': 'Chill',
@@ -162,47 +120,39 @@ class _ListWidgetState extends State<ListWidget> {
       'title': 'Vibez',
       'icon': Icon(Icons.arrow_right_sharp),
       'selected': false,
+    },
+    {
+      'index': 12,
+      'title': 'Loud',
+      'icon': Icon(Icons.arrow_right_sharp),
+      'selected': false,
     }
   ];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      itemCount: vibes.length,
-      itemBuilder: (context, index) {
-        return Container(
-          child: Card(
-            shadowColor: Colors.brown,
-            child: ListTile(
-              leading: vibes[index]['icon'],
-              title: Text(
-                vibes[index]['title'],
-                style: index == selectedIndex ? TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
-              ),
-              selected: index == selectedIndex,
-              selectedTileColor: index % 2 == 0 ? Colors.blue : Colors.orange,
-              onTap: () {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-            ),
-          ),
-          decoration: new BoxDecoration(
-            boxShadow: [
-              new BoxShadow(
-                color: Colors.black45,
-                blurRadius: 20.0,
-                spreadRadius: 1.0,
-              ),
-            ]
-          ),
-        );
-      },
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return Container(
+                child: ListTile(
+                    leading: vibes[index]['icon'],
+                    title: Text(
+                      vibes[index]['title'],
+                      style: index == selectedIndex ? TextStyle(color: Colors.white) : TextStyle(color: Colors.black),
+                    ),
+                    selected: index == selectedIndex,
+                    selectedTileColor: index.isEven ? Colors.blue : Colors.orange,
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                  ),
+              );
+            },
+          childCount: vibes.length,
+        )
     );
   }
 }
