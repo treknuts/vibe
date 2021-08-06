@@ -24,9 +24,16 @@ class AppMain extends StatelessWidget {
               snap: false,
               floating: false,
               expandedHeight: 160.0,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text("Vibe", style: TextStyle(color: Colors.white),),
-                background: Image(image: AssetImage("assets/icon/icon.png"),),
+              flexibleSpace: Padding(
+                padding: EdgeInsets.only(top: 56.0, left: 4.0, bottom: 4.0),
+                child: Stack(
+                  children: [
+                    Positioned.directional(
+                        textDirection: TextDirection.ltr,
+                        child: Image(image: AssetImage("assets/icon/icon.png"))
+                    )
+                  ],
+                ),
               ),
             ),
             ListWidget(),
