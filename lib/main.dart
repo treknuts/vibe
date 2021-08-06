@@ -30,7 +30,7 @@ class AppMain extends StatelessWidget {
                   children: [
                     Positioned.directional(
                         textDirection: TextDirection.ltr,
-                        child: Image(image: AssetImage("assets/icon/icon.png"))
+                        child: Image(image: AssetImage("assets/icon/vibe-icon.png"))
                     )
                   ],
                 ),
