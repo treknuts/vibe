@@ -43,7 +43,7 @@ class ButtonRowSection extends StatelessWidget {
     return Container(
       color: Colors.blue,
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.only(top: 8.0, bottom: 18.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
